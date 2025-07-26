@@ -8,6 +8,7 @@ Este proyecto es un generador de CV interactivo construido con React y Vite, que
 - Asistente de IA para sugerencias y mejoras.
 - Interfaz de usuario moderna y personalizable.
 - Exportación a múltiples formatos (próximamente).
+- Es necesario configurar Vercel para el directorio de salida.
 
 ## Instalación
 
