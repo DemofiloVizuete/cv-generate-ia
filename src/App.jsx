@@ -201,14 +201,16 @@ const App = () => {
                 >
                   Contactar
                 </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 border border-border rounded-lg font-medium hover:bg-secondary transition-colors duration-200 flex items-center gap-2"
-                >
-                  <Download className="w-4 h-4" />
-                  Descargar CV
-                </motion.button>
+                <a href="/assets/ProfileCV.pdf" download="Demófilo_Vizuete_CV.pdf">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-3 border border-border rounded-lg font-medium hover:bg-secondary transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    Descargar CV
+                  </motion.button>
+                </a>
               </div>
 
               <div className="flex items-center gap-6 text-sm text-muted-foreground">
