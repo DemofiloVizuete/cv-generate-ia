@@ -485,7 +485,7 @@ const App = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold">Email</h3>
-                      <p className="text-muted-foreground">demofilo.vizuete@gmail.com</p>
+                      <p className="text-muted-foreground">personal@demofilo.net</p>
                     </div>
                   </div>
                   
