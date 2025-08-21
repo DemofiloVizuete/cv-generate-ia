@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   Moon, 
   Sun, 
@@ -16,6 +17,7 @@ import {
   Download
 } from 'lucide-react';
 import './App.css';
+import LanguageToggle from './components/LanguageToggle';
 
 // Importar imágenes
 import iaImage from './assets/ia_tecnologia_profesional.png';
@@ -25,6 +27,7 @@ import redesImage from './assets/redes_neuronales_abstractas.png';
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (darkMode) {
@@ -45,51 +48,21 @@ const App = () => {
     }
   };
 
-  const experiences = [
-    {
-      company: "Avanade",
-      position: "Consultor en Automatización Inteligente, Azure AI Engineer",
-      period: "dic. 2022 - actualidad",
-      duration: "2 años 8 meses",
-      location: "Sevilla, Andalucía, España · En remoto",
-      description: "Optimización de procesos empresariales mediante soluciones RPA. Liderazgo de proyectos de transformación digital con Azure AI.",
-      skills: ["Dirección de proyectos de TI", "Microsoft Azure", "RPA", "Inteligencia Artificial"]
-    },
-    {
-      company: "Avanade",
-      position: "Sr Anls, Solution Dev",
-      period: "feb. 2019 - feb. 2023",
-      duration: "4 años 1 mes",
-      location: "Sevilla y alrededores, España",
-      description: "Desarrollo de soluciones y análisis senior con enfoque en automatización inteligente.",
-      skills: ["Desarrollo de oportunidades de negocio", "Análisis de soluciones"]
-    },
-    {
-      company: "Indra",
-      position: "Analista Sistemas (BPO Endesa) - RPA Technologies",
-      period: "mar. 2017 - ene. 2019",
-      duration: "1 año 11 meses",
-      location: "Sevilla y alrededores, España",
-      description: "Cobertura integral de procesos de back office en el sector energético. Análisis y desarrollo de tecnologías RPA.",
-      skills: ["RPA Technologies", "Análisis de sistemas", "Sector energético"]
-    }
-  ];
+  // Función para obtener la URL del CV según el idioma
+  const getCvUrl = () => {
+    const lang = i18n.language;
+    return lang === 'en' ? '/assets/ProfileCV_eng.pdf' : '/assets/ProfileCV_es.pdf';
+  };
 
-  const education = [
-    {
-      institution: "Sevilla",
-      degree: "Técnico Especialista Informatica Gestión, Administrativa y Comercial",
-      period: "1996 - 2002",
-      grade: "Nota: 8",
-      description: "Formación Reglada impartida en el I.E.S Punta del Verde de Sevilla."
-    },
-    {
-      institution: "Instituto de Estudios Cajasol",
-      degree: "100 Caminos AI Éxito, Master Empresarial",
-      period: "2014 - 2014",
-      description: "Una de las escuelas de negocio más prestigiosas de Andalucía con 25 años de experiencia."
-    }
-  ];
+  // Función para obtener el nombre del archivo de descarga según el idioma
+  const getCvFileName = () => {
+    const lang = i18n.language;
+    return lang === 'en' ? 'Demófilo_Vizuete_CV_ENG.pdf' : 'Demófilo_Vizuete_CV_ES.pdf';
+  };
+
+  // Obtener datos dinámicamente de las traducciones
+  const experiences = t('experience.jobs', { returnObjects: true }) || [];
+  const education = t('education.items', { returnObjects: true }) || [];
 
   const certifications = [
     {
@@ -138,28 +111,38 @@ const App = () => {
           </motion.div>
           
           <nav className="hidden md:flex space-x-8">
-            {['Inicio', 'Experiencia', 'Educación', 'Certificaciones', 'Habilidades', 'Contacto'].map((item, index) => (
+            {[
+              { key: 'home', id: 'inicio' },
+              { key: 'experience', id: 'experiencia' },
+              { key: 'education', id: 'educacion' },
+              { key: 'certifications', id: 'certificaciones' },
+              { key: 'skills', id: 'habilidades' },
+              { key: 'contact', id: 'contacto' }
+            ].map((item, index) => (
               <motion.button
-                key={item}
+                key={item.key}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                onClick={() => scrollToSection(item.toLowerCase().replace('ó', 'o'))}
+                onClick={() => scrollToSection(item.id)}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
-                {item}
+                {t(`nav.${item.key}`)}
               </motion.button>
             ))}
           </nav>
 
-          <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            onClick={toggleDarkMode}
-            className="p-2 rounded-lg bg-secondary hover:bg-accent transition-colors duration-200"
-          >
-            {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </motion.button>
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg bg-secondary hover:bg-accent transition-colors duration-200"
+            >
+              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </motion.button>
+          </div>
         </div>
       </header>
 
@@ -181,15 +164,13 @@ const App = () => {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                Demófilo Vizuete Diaz
+                {t('hero.name')}
               </h1>
               <h2 className="text-2xl lg:text-3xl text-muted-foreground mb-8">
-                Consultor en Inteligencia Artificial
+                {t('hero.title')}
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Más de 20 años de experiencia en el sector tecnológico, especializado en 
-                automatización inteligente y soluciones de IA. Experto en transformación 
-                digital y optimización de procesos empresariales.
+                {t('hero.description')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -199,16 +180,16 @@ const App = () => {
                   onClick={() => scrollToSection('contacto')}
                   className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200"
                 >
-                  Contactar
+                  {t('hero.contact_button')}
                 </motion.button>
-                <a href="/assets/ProfileCV.pdf" download="Demófilo_Vizuete_CV.pdf">
+                <a href={getCvUrl()} download={getCvFileName()}>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-8 py-3 border border-border rounded-lg font-medium hover:bg-secondary transition-colors duration-200 flex items-center gap-2"
                   >
                     <Download className="w-4 h-4" />
-                    Descargar CV
+                    {t('hero.download_button')}
                   </motion.button>
                 </a>
               </div>
@@ -216,11 +197,11 @@ const App = () => {
               <div className="flex items-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  Sevilla, España
+                  {t('hero.location')}
                 </div>
                 <div className="flex items-center gap-2">
                   <Briefcase className="w-4 h-4" />
-                  Avanade
+                  {t('hero.company')}
                 </div>
               </div>
             </motion.div>
@@ -263,9 +244,9 @@ const App = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Experiencia Profesional</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('experience.title')}</h2>
             <p className="text-muted-foreground text-lg">
-              Más de dos décadas liderando proyectos de transformación digital
+              {t('experience.subtitle')}
             </p>
           </motion.div>
 
@@ -328,9 +309,9 @@ const App = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Educación</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('education.title')}</h2>
             <p className="text-muted-foreground text-lg">
-              Formación académica y especialización profesional
+              {t('education.subtitle')}
             </p>
           </motion.div>
 
@@ -376,9 +357,9 @@ const App = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Certificaciones</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('certifications.title')}</h2>
             <p className="text-muted-foreground text-lg">
-              Certificaciones profesionales en tecnologías Microsoft
+              {t('certifications.subtitle')}
             </p>
           </motion.div>
 
@@ -400,10 +381,10 @@ const App = () => {
                     <h3 className="text-xl font-bold mb-2">{cert.name}</h3>
                     <p className="text-primary font-semibold mb-2">{cert.issuer}</p>
                     <p className="text-muted-foreground text-sm mb-2">
-                      Expedición: {cert.date}
+                      {t('certifications.issued')}: {cert.date}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      ID: {cert.credentialId}
+                      {t('certifications.id')}: {cert.credentialId}
                     </p>
                   </div>
                 </div>
@@ -423,9 +404,9 @@ const App = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Habilidades Técnicas</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('skills.title')}</h2>
             <p className="text-muted-foreground text-lg">
-              Tecnologías y competencias especializadas
+              {t('skills.subtitle')}
             </p>
           </motion.div>
 
@@ -463,9 +444,9 @@ const App = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Contacto</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('contact.title')}</h2>
             <p className="text-muted-foreground text-lg">
-              ¿Interesado en colaborar? ¡Hablemos!
+              {t('contact.subtitle')}
             </p>
           </motion.div>
 
@@ -484,7 +465,7 @@ const App = () => {
                       <Mail className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Email</h3>
+                      <h3 className="font-semibold">{t('contact.email')}</h3>
                       <p className="text-muted-foreground">personal@demofilo.net</p>
                     </div>
                   </div>
@@ -494,8 +475,8 @@ const App = () => {
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Ubicación</h3>
-                      <p className="text-muted-foreground">Sevilla, España</p>
+                      <h3 className="font-semibold">{t('contact.location')}</h3>
+                      <p className="text-muted-foreground">{t('hero.location')}</p>
                     </div>
                   </div>
 
@@ -504,7 +485,7 @@ const App = () => {
                       <ExternalLink className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">LinkedIn</h3>
+                      <h3 className="font-semibold">{t('contact.linkedin')}</h3>
                       <a 
                         href="https://www.linkedin.com/in/demofilovizuete/" 
                         target="_blank" 
@@ -535,7 +516,7 @@ const App = () => {
       <footer className="py-8 border-t border-border">
         <div className="container mx-auto px-6 text-center">
           <p className="text-muted-foreground">
-            © 2025 Demófilo Vizuete Diaz. Todos los derechos reservados.
+            © 2025 Demófilo Vizuete Diaz. {t('footer.rights')}
           </p>
         </div>
       </footer>
