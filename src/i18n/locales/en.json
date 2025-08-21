@@ -1,0 +1,91 @@
+{
+  "nav": {
+    "home": "Home",
+    "experience": "Experience",
+    "education": "Education",
+    "certifications": "Certifications",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "Demófilo Vizuete Diaz",
+    "title": "AI Consultant",
+    "description": "Over 20 years of experience in the technology sector, specialized in intelligent automation and AI solutions. Expert in digital transformation and business process optimization.",
+    "contact_button": "Contact",
+    "download_button": "Download CV",
+    "location": "Seville, Spain",
+    "company": "Avanade"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "Over two decades leading digital transformation projects",
+    "jobs": [
+      {
+        "company": "Avanade",
+        "position": "Intelligent Automation Consultant, Azure AI Engineer",
+        "period": "Dec. 2022 - Present",
+        "duration": "2 years 8 months",
+        "location": "Seville, Andalusia, Spain · Remote",
+        "description": "Business process optimization through RPA solutions. Leadership of digital transformation projects with Azure AI.",
+        "skills": ["IT Project Management", "Microsoft Azure", "RPA", "Artificial Intelligence"]
+      },
+      {
+        "company": "Avanade",
+        "position": "Sr Analyst, Solution Dev",
+        "period": "Feb. 2019 - Feb. 2023",
+        "duration": "4 years 1 month",
+        "location": "Seville and surrounding areas, Spain",
+        "description": "Solutions development and senior analysis with focus on intelligent automation.",
+        "skills": ["Business Development", "Solution Analysis"]
+      },
+      {
+        "company": "Indra",
+        "position": "Systems Analyst (BPO Endesa) - RPA Technologies",
+        "period": "Mar. 2017 - Jan. 2019",
+        "duration": "1 year 11 months",
+        "location": "Seville and surrounding areas, Spain",
+        "description": "Comprehensive coverage of back office processes in the energy sector. Analysis and development of RPA technologies.",
+        "skills": ["RPA Technologies", "Systems Analysis", "Energy Sector"]
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "subtitle": "Academic training and professional specialization",
+    "items": [
+      {
+        "institution": "Seville",
+        "degree": "Computer Science Specialist Technician, Management, Administrative and Commercial",
+        "period": "1996 - 2002",
+        "grade": "Grade: 8",
+        "description": "Regulated training provided at I.E.S Punta del Verde in Seville."
+      },
+      {
+        "institution": "Cajasol Studies Institute",
+        "degree": "100 Paths to AI Success, Business Master",
+        "period": "2014 - 2014",
+        "description": "One of the most prestigious business schools in Andalusia with 25 years of experience."
+      }
+    ]
+  },
+  "certifications": {
+    "title": "Certifications",
+    "subtitle": "Professional certifications in Microsoft technologies",
+    "issued": "Issued",
+    "id": "ID"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "subtitle": "Specialized technologies and competencies"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Interested in collaborating? Let's talk!",
+    "email": "Email",
+    "location": "Location",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

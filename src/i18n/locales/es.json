@@ -1,0 +1,91 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "experience": "Experiencia",
+    "education": "Educación",
+    "certifications": "Certificaciones",
+    "skills": "Habilidades",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "name": "Demófilo Vizuete Diaz",
+    "title": "Consultor en Inteligencia Artificial",
+    "description": "Más de 20 años de experiencia en el sector tecnológico, especializado en automatización inteligente y soluciones de IA. Experto en transformación digital y optimización de procesos empresariales.",
+    "contact_button": "Contactar",
+    "download_button": "Descargar CV",
+    "location": "Sevilla, España",
+    "company": "Avanade"
+  },
+  "experience": {
+    "title": "Experiencia Profesional",
+    "subtitle": "Más de dos décadas liderando proyectos de transformación digital",
+    "jobs": [
+      {
+        "company": "Avanade",
+        "position": "Consultor en Automatización Inteligente, Azure AI Engineer",
+        "period": "dic. 2022 - actualidad",
+        "duration": "2 años 8 meses",
+        "location": "Sevilla, Andalucía, España · En remoto",
+        "description": "Optimización de procesos empresariales mediante soluciones RPA. Liderazgo de proyectos de transformación digital con Azure AI.",
+        "skills": ["Dirección de proyectos de TI", "Microsoft Azure", "RPA", "Inteligencia Artificial"]
+      },
+      {
+        "company": "Avanade",
+        "position": "Sr Anls, Solution Dev",
+        "period": "feb. 2019 - feb. 2023",
+        "duration": "4 años 1 mes",
+        "location": "Sevilla y alrededores, España",
+        "description": "Desarrollo de soluciones y análisis senior con enfoque en automatización inteligente.",
+        "skills": ["Desarrollo de oportunidades de negocio", "Análisis de soluciones"]
+      },
+      {
+        "company": "Indra",
+        "position": "Analista Sistemas (BPO Endesa) - RPA Technologies",
+        "period": "mar. 2017 - ene. 2019",
+        "duration": "1 año 11 meses",
+        "location": "Sevilla y alrededores, España",
+        "description": "Cobertura integral de procesos de back office en el sector energético. Análisis y desarrollo de tecnologías RPA.",
+        "skills": ["RPA Technologies", "Análisis de sistemas", "Sector energético"]
+      }
+    ]
+  },
+  "education": {
+    "title": "Educación",
+    "subtitle": "Formación académica y especialización profesional",
+    "items": [
+      {
+        "institution": "Sevilla",
+        "degree": "Técnico Especialista Informatica Gestión, Administrativa y Comercial",
+        "period": "1996 - 2002",
+        "grade": "Nota: 8",
+        "description": "Formación Reglada impartida en el I.E.S Punta del Verde de Sevilla."
+      },
+      {
+        "institution": "Instituto de Estudios Cajasol",
+        "degree": "100 Caminos AI Éxito, Master Empresarial",
+        "period": "2014 - 2014",
+        "description": "Una de las escuelas de negocio más prestigiosas de Andalucía con 25 años de experiencia."
+      }
+    ]
+  },
+  "certifications": {
+    "title": "Certificaciones",
+    "subtitle": "Certificaciones profesionales en tecnologías Microsoft",
+    "issued": "Expedición",
+    "id": "ID"
+  },
+  "skills": {
+    "title": "Habilidades Técnicas",
+    "subtitle": "Tecnologías y competencias especializadas"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Interesado en colaborar? ¡Hablemos!",
+    "email": "Email",
+    "location": "Ubicación",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  }
+}
