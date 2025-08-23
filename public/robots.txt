@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://demofilo.net/sitemap.xml
+
+# Disallow sensitive files
+Disallow: /src/
+Disallow: /.env
+Disallow: /config/
+Disallow: /node_modules/
+
+# Allow important resources
+Allow: /assets/
+Allow: /favicon.ico
+
+# Crawl delay (optional)
+Crawl-delay: 1

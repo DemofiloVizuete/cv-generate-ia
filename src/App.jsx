@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 import LanguageToggle from './components/LanguageToggle';
+import ProtectedEmail from './components/ProtectedEmail';
 
 // Importar imágenes
 import iaImage from './assets/ia_tecnologia_profesional.png';
@@ -100,17 +101,17 @@ const App = () => {
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       {/* Header/Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border" role="banner">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="text-xl font-bold"
           >
-            Demófilo Vizuete
+            <span aria-label="Nombre completo">Demófilo Vizuete</span>
           </motion.div>
           
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Navegación principal">
             {[
               { key: 'home', id: 'inicio' },
               { key: 'experience', id: 'experiencia' },
@@ -139,6 +140,7 @@ const App = () => {
               animate={{ opacity: 1, x: 0 }}
               onClick={toggleDarkMode}
               className="p-2 rounded-lg bg-secondary hover:bg-accent transition-colors duration-200"
+              aria-label={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             >
               {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </motion.button>
@@ -466,7 +468,10 @@ const App = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold">{t('contact.email')}</h3>
-                      <p className="text-muted-foreground">personal@demofilo.net</p>
+                      <ProtectedEmail 
+                        email="personal@demofilo.net" 
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      />
                     </div>
                   </div>
                   
@@ -489,8 +494,9 @@ const App = () => {
                       <a 
                         href="https://www.linkedin.com/in/demofilovizuete/" 
                         target="_blank" 
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="text-primary hover:underline"
+                        aria-label="Perfil de LinkedIn de Demófilo Vizuete"
                       >
                         /in/demofilovizuete
                       </a>
