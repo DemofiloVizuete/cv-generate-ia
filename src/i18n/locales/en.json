@@ -85,6 +85,58 @@
     "location": "Location",
     "linkedin": "LinkedIn"
   },
+  "cookies": {
+    "title": "🍪 Cookie Usage",
+    "description": "We use cookies and local storage to remember your preferred language and improve your browsing experience. We don't share this information with third parties.",
+    "learnMore": "Learn more",
+    "accept": "Accept all",
+    "reject": "Reject optional",
+    "settings": "⚙️ Configure",
+    "settingsTitle": "Cookie Settings",
+    "settingsDescription": "Customize which cookies you want to allow in your browser.",
+    "settingsSaved": "✅ Settings saved successfully",
+    "settingsNote": "You can change these preferences at any time from the settings button."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Full transparency about how we handle your information",
+    "dataCollection": {
+      "title": "Information We Collect",
+      "description": "This web application collects minimal information to improve your experience:",
+      "language": "Your language preference (Spanish or English)",
+      "theme": "Your theme preference (light or dark)",
+      "navigation": "Basic navigation information (locally only)"
+    },
+    "cookies": {
+      "title": "Cookie and Local Storage Usage",
+      "description": "We use the following storage technologies:",
+      "essential": {
+        "title": "Essential Cookies",
+        "description": "Necessary for basic site functionality (language and theme preferences)."
+      },
+      "preference": {
+        "title": "Preference Cookies",
+        "description": "Remember your settings for future visits (completely optional)."
+      }
+    },
+    "rights": {
+      "title": "Your Rights",
+      "description": "You have full control over your information:",
+      "access": "Access all information stored in your browser",
+      "delete": "Delete all information whenever you want",
+      "modify": "Change your preferences at any time",
+      "contact": "For any questions, contact us at:"
+    },
+    "lastUpdated": {
+      "title": "Last Updated",
+      "date": "August 23, 2025"
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close"
+  },
   "footer": {
     "rights": "All rights reserved."
   }

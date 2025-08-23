@@ -19,6 +19,9 @@ import {
 import './App.css';
 import LanguageToggle from './components/LanguageToggle';
 import ProtectedEmail from './components/ProtectedEmail';
+import CookieBanner from './components/CookieBanner';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import CookieSettings from './components/CookieSettings';
 
 // Importar imágenes
 import iaImage from './assets/ia_tecnologia_profesional.png';
@@ -131,6 +134,15 @@ const App = () => {
                 {t(`nav.${item.key}`)}
               </motion.button>
             ))}
+            <motion.button
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              onClick={() => scrollToSection('privacy-policy')}
+              className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm"
+            >
+              {t('privacy.title')}
+            </motion.button>
           </nav>
 
           <div className="flex items-center gap-2">
@@ -518,6 +530,9 @@ const App = () => {
         </div>
       </section>
 
+      {/* Privacy Policy */}
+      <PrivacyPolicy />
+
       {/* Footer */}
       <footer className="py-8 border-t border-border">
         <div className="container mx-auto px-6 text-center">
@@ -526,6 +541,12 @@ const App = () => {
           </p>
         </div>
       </footer>
+
+      {/* Cookie Banner */}
+      <CookieBanner />
+      
+      {/* Cookie Settings */}
+      <CookieSettings />
     </div>
   );
 };

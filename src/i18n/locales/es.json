@@ -85,6 +85,58 @@
     "location": "Ubicación",
     "linkedin": "LinkedIn"
   },
+  "cookies": {
+    "title": "🍪 Uso de Cookies",
+    "description": "Utilizamos cookies y almacenamiento local para recordar tu idioma preferido y mejorar tu experiencia de navegación. No compartimos esta información con terceros.",
+    "learnMore": "Más información",
+    "accept": "Aceptar todas",
+    "reject": "Rechazar opcionales",
+    "settings": "⚙️ Configurar",
+    "settingsTitle": "Configuración de Cookies",
+    "settingsDescription": "Personaliza qué cookies quieres permitir en tu navegador.",
+    "settingsSaved": "✅ Configuración guardada correctamente",
+    "settingsNote": "Puedes cambiar estas preferencias en cualquier momento desde el botón de configuración."
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "subtitle": "Transparencia total sobre cómo manejamos tu información",
+    "dataCollection": {
+      "title": "Información que Recopilamos",
+      "description": "Esta aplicación web recopila mínima información para mejorar tu experiencia:",
+      "language": "Tu preferencia de idioma (español o inglés)",
+      "theme": "Tu preferencia de tema (claro u oscuro)",
+      "navigation": "Información básica de navegación (solo localmente)"
+    },
+    "cookies": {
+      "title": "Uso de Cookies y Almacenamiento Local",
+      "description": "Utilizamos las siguientes tecnologías de almacenamiento:",
+      "essential": {
+        "title": "Cookies Esenciales",
+        "description": "Necesarias para el funcionamiento básico del sitio (preferencias de idioma y tema)."
+      },
+      "preference": {
+        "title": "Cookies de Preferencia",
+        "description": "Recuerdan tus configuraciones para futuras visitas (completamente opcionales)."
+      }
+    },
+    "rights": {
+      "title": "Tus Derechos",
+      "description": "Tienes control total sobre tu información:",
+      "access": "Acceder a toda la información almacenada en tu navegador",
+      "delete": "Eliminar toda la información cuando quieras",
+      "modify": "Cambiar tus preferencias en cualquier momento",
+      "contact": "Para cualquier consulta, contáctanos en:"
+    },
+    "lastUpdated": {
+      "title": "Última Actualización",
+      "date": "23 de agosto de 2025"
+    }
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "close": "Cerrar"
+  },
   "footer": {
     "rights": "Todos los derechos reservados."
   }
