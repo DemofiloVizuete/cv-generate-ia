@@ -42,9 +42,7 @@
       "permanent": false
     }
   ],
-  "functions": {
-    "src/main.jsx": {
-      "maxDuration": 10
-    }
-  }
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "installCommand": "pnpm install"
 }
