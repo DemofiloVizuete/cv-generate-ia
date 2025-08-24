@@ -73,7 +73,7 @@ const CookieSettings = () => {
         <Button
           variant="ghost"
           size="sm"
-          className="fixed bottom-4 left-4 z-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl"
+          className="fixed bottom-4 left-4 z-40 bg-card border border-border shadow-lg hover:shadow-xl hover:bg-accent"
         >
           <Settings className="h-4 w-4 mr-2" />
           {t('cookies.settings')}
@@ -95,10 +95,10 @@ const CookieSettings = () => {
           <div className="flex items-center justify-between space-x-2">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <Shield className="h-4 w-4 text-green-600" />
+                <Shield className="h-4 w-4 text-green-500" />
                 <Label className="font-medium">{t('privacy.cookies.essential.title')}</Label>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 {t('privacy.cookies.essential.description')}
               </p>
             </div>
@@ -113,10 +113,10 @@ const CookieSettings = () => {
           <div className="flex items-center justify-between space-x-2">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <Globe className="h-4 w-4 text-blue-600" />
+                <Globe className="h-4 w-4 text-primary" />
                 <Label className="font-medium">{t('privacy.cookies.preference.title')}</Label>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 {t('privacy.cookies.preference.description')}
               </p>
             </div>
@@ -128,8 +128,8 @@ const CookieSettings = () => {
           </div>
 
           {/* Información adicional */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
+          <div className="bg-primary/10 border border-primary/20 p-4 rounded-lg">
+            <p className="text-sm text-primary">
               💡 {t('cookies.settingsNote')}
             </p>
           </div>
