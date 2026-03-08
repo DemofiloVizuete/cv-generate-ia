@@ -1,25 +1,19 @@
 import React from 'react';
 
 const ProtectedEmail = ({ email, className = "" }) => {
-  // Codificar el email para protegerlo de bots
-  const encodedEmail = email.split('').map((char, index) => {
-    return `&#${char.charCodeAt(0)};`;
-  }).join('');
-
-  const handleEmailClick = (e) => {
-    e.preventDefault();
-    // Decodificar y abrir el cliente de correo
-    const decodedEmail = email;
-    window.location.href = `mailto:${decodedEmail}`;
-  };
+  // Codificar/decodificar en memoria para evitar HTML crudo en el DOM
+  const encodedCharCodes = email.split('').map((char) => char.charCodeAt(0));
+  const visibleEmail = encodedCharCodes.map((code) => String.fromCharCode(code)).join('');
 
   return (
-    <span 
+    <a
+      href={`mailto:${visibleEmail}`}
       className={`cursor-pointer hover:underline ${className}`}
-      onClick={handleEmailClick}
-      dangerouslySetInnerHTML={{ __html: encodedEmail }}
       title="Hacer clic para enviar email"
-    />
+      aria-label="Enviar email de contacto"
+    >
+      {visibleEmail}
+    </a>
   );
 };
 
