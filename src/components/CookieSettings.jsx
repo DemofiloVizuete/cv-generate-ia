@@ -12,6 +12,13 @@ import {
 } from './ui/dialog';
 import { Switch } from './ui/switch';
 import { Label } from './ui/label';
+import {
+  CONSENT_STATES,
+  getConsentState,
+  getCookieSettings,
+  onConsentStateChange,
+  saveCookieSettings
+} from '../lib/consent';
 
 const CookieSettings = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,30 +30,45 @@ const CookieSettings = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Cargar configuración guardada
-    const savedSettings = localStorage.getItem('cookieSettings');
-    if (savedSettings) {
-      setSettings({ ...settings, ...JSON.parse(savedSettings) });
+    const currentConsentState = getConsentState();
+
+    if (currentConsentState === CONSENT_STATES.CONFIGURED) {
+      const savedSettings = getCookieSettings();
+      if (savedSettings) {
+        setSettings((previousSettings) => ({ ...previousSettings, ...savedSettings }));
+      }
+    }
+
+    if (currentConsentState === CONSENT_STATES.REJECTED) {
+      setSettings((previousSettings) => ({ ...previousSettings, preferences: false }));
     }
 
     // Escuchar evento para abrir configuración
     const handleOpenSettings = () => setIsOpen(true);
+    const removeConsentListener = onConsentStateChange(() => {
+      const nextConsentState = getConsentState();
+
+      if (nextConsentState === CONSENT_STATES.CONFIGURED) {
+        const savedSettings = getCookieSettings();
+        if (savedSettings) {
+          setSettings((previousSettings) => ({ ...previousSettings, ...savedSettings }));
+        }
+      }
+
+      if (nextConsentState === CONSENT_STATES.REJECTED) {
+        setSettings((previousSettings) => ({ ...previousSettings, preferences: false }));
+      }
+    });
     window.addEventListener('openCookieSettings', handleOpenSettings);
     
     return () => {
+      removeConsentListener();
       window.removeEventListener('openCookieSettings', handleOpenSettings);
     };
   }, []);
 
   const handleSaveSettings = () => {
-    localStorage.setItem('cookieSettings', JSON.stringify(settings));
-    localStorage.setItem('cookieConsent', 'configured');
-    
-    // Si se desactivan las preferencias, limpiar datos relacionados
-    if (!settings.preferences) {
-      localStorage.removeItem('i18nextLng');
-      document.cookie = "sidebar_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    }
+    saveCookieSettings(settings);
     
     setIsOpen(false);
     
