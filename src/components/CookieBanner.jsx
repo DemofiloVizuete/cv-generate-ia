@@ -2,29 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Cookie, ExternalLink, Settings } from 'lucide-react';
 import { Button } from './ui/button';
+import {
+  CONSENT_STATES,
+  acceptCookies,
+  getConsentState,
+  rejectCookies
+} from '../lib/consent';
 
 const CookieBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Verificar si el usuario ya ha aceptado las cookies
-    const cookieConsent = localStorage.getItem('cookieConsent');
-    if (!cookieConsent) {
+    if (getConsentState() === CONSENT_STATES.UNKNOWN) {
       setIsVisible(true);
     }
   }, []);
 
-  const acceptCookies = () => {
-    localStorage.setItem('cookieConsent', 'accepted');
+  const handleAcceptCookies = () => {
+    acceptCookies();
     setIsVisible(false);
   };
 
-  const rejectCookies = () => {
-    localStorage.setItem('cookieConsent', 'rejected');
-    // Limpiar cookies existentes (excepto las esenciales)
-    localStorage.removeItem('i18nextLng');
-    document.cookie = "sidebar_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  const handleRejectCookies = () => {
+    rejectCookies();
     setIsVisible(false);
   };
 
@@ -76,14 +77,14 @@ const CookieBanner = () => {
             <Button
               variant="outline"
               size="sm"
-              onClick={rejectCookies}
+              onClick={handleRejectCookies}
               className="hover:bg-secondary"
             >
               {t('cookies.reject')}
             </Button>
             <Button
               size="sm"
-              onClick={acceptCookies}
+              onClick={handleAcceptCookies}
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               {t('cookies.accept')}
