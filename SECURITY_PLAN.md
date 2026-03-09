@@ -20,7 +20,7 @@
 - [x] ✅ Configurados headers de seguridad en Vite y Vercel
 - [x] ✅ Implementado Content Security Policy (CSP)
 - [x] ✅ Optimizada la construcción con chunks manuales
-- [x] ✅ Configurados headers de seguridad (X-Frame-Options, X-XSS-Protection, etc.)
+- [x] ✅ Configurados headers de seguridad (X-Frame-Options y X-Content-Type-Options, sin X-XSS-Protection obsoleto)
 
 ### 3. MAIL-CONFIG (Error) - Configuración de correo ✅ RESUELTO
 **Problema detectado:** Configuración de correo electrónico o exposición de información sensible
@@ -68,7 +68,7 @@
 
 ## 🔐 Mejoras de seguridad implementadas:
 
-1. **Headers de Seguridad:** X-Frame-Options, X-XSS-Protection, X-Content-Type-Options
+1. **Headers de Seguridad:** X-Frame-Options, X-Content-Type-Options, Referrer-Policy y Permissions-Policy (eliminado X-XSS-Protection obsoleto)
 2. **CSP:** Content Security Policy restrictivo pero funcional
 3. **Email Protection:** Codificación HTML entities + manejo seguro de mailto
 4. **SEO Security:** robots.txt y sitemap.xml apropiados
