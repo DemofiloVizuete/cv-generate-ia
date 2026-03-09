@@ -13,6 +13,7 @@ import {
 import { Switch } from './ui/switch';
 import { Label } from './ui/label';
 import {
+  DEFAULT_COOKIE_SETTINGS,
   CONSENT_STATES,
   getConsentState,
   getCookieSettings,
@@ -22,11 +23,7 @@ import {
 
 const CookieSettings = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [settings, setSettings] = useState({
-    essential: true, // Siempre true, no se puede desactivar
-    preferences: true,
-    analytics: false // No las usamos, pero las dejamos para futuro
-  });
+  const [settings, setSettings] = useState(DEFAULT_COOKIE_SETTINGS);
   const { t } = useTranslation();
 
   useEffect(() => {
