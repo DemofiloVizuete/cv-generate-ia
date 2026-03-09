@@ -1,4 +1,8 @@
 const isBrowser = () => typeof window !== 'undefined';
+export const THEME_STORAGE_KEY = 'cvTheme';
+export const LANGUAGE_STORAGE_KEY = 'i18nextLng';
+export const THEME_DARK = 'dark';
+export const THEME_LIGHT = 'light';
 
 export const readLocalStorage = (key) => {
   if (!isBrowser()) return null;

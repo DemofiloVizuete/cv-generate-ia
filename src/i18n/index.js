@@ -6,6 +6,7 @@ import {
   onConsentStateChange
 } from '../lib/consent';
 import {
+  LANGUAGE_STORAGE_KEY,
   removeLocalStorage,
   writeLocalStorage
 } from '../lib/safeLocalStorage';
@@ -13,18 +14,22 @@ import {
 import es from './locales/es.json';
 import en from './locales/en.json';
 
+const resources = {
+  es: {
+    translation: es
+  },
+  en: {
+    translation: en
+  }
+};
+
+const SUPPORTED_LANGUAGES = Object.keys(resources);
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources: {
-      es: {
-        translation: es
-      },
-      en: {
-        translation: en
-      }
-    },
+    resources,
     lng: 'es', // idioma por defecto
     fallbackLng: 'es',
     
@@ -41,13 +46,13 @@ i18n
   });
 
 const syncLanguageStorage = (lng) => {
-  if (!['es', 'en'].includes(lng)) return;
+  if (!SUPPORTED_LANGUAGES.includes(lng)) return;
   if (canPersistNonEssentialPreferences()) {
-    writeLocalStorage('i18nextLng', lng);
+    writeLocalStorage(LANGUAGE_STORAGE_KEY, lng);
     return;
   }
 
-  removeLocalStorage('i18nextLng');
+  removeLocalStorage(LANGUAGE_STORAGE_KEY);
 };
 
 i18n.on('languageChanged', syncLanguageStorage);

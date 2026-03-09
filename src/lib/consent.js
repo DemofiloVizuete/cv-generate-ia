@@ -1,7 +1,9 @@
 import {
+  LANGUAGE_STORAGE_KEY,
   readLocalStorage,
   readLocalStorageJSON,
   removeLocalStorage,
+  THEME_STORAGE_KEY,
   writeLocalStorage
 } from './safeLocalStorage';
 
@@ -20,7 +22,6 @@ export const DEFAULT_COOKIE_SETTINGS = {
 
 const CONSENT_KEY = 'cookieConsent';
 const SETTINGS_KEY = 'cookieSettings';
-const THEME_KEY = 'cvTheme';
 const CONSENT_EVENT = 'cookieConsentChanged';
 
 const isBrowser = () => typeof window !== 'undefined';
@@ -28,6 +29,8 @@ const isBrowser = () => typeof window !== 'undefined';
 const isCookieSettingsShape = (value) => (
   Boolean(value)
   && typeof value === 'object'
+  && !Array.isArray(value)
+  && typeof value.essential === 'boolean'
   && typeof value.preferences === 'boolean'
   && typeof value.analytics === 'boolean'
 );
@@ -38,8 +41,8 @@ const normalizeCookieSettings = (value) => ({
 });
 
 export const clearNonEssentialPreferences = () => {
-  removeLocalStorage('i18nextLng');
-  removeLocalStorage(THEME_KEY);
+  removeLocalStorage(LANGUAGE_STORAGE_KEY);
+  removeLocalStorage(THEME_STORAGE_KEY);
   if (isBrowser()) {
     document.cookie = 'sidebar_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   }

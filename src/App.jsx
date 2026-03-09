@@ -29,6 +29,9 @@ import {
 import {
   readLocalStorage,
   removeLocalStorage,
+  THEME_DARK,
+  THEME_LIGHT,
+  THEME_STORAGE_KEY,
   writeLocalStorage
 } from './lib/safeLocalStorage';
 
@@ -39,7 +42,7 @@ import redesImage from './assets/redes_neuronales_abstractas.png';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(() => (
-    canPersistNonEssentialPreferences() && readLocalStorage('cvTheme') === 'dark'
+    canPersistNonEssentialPreferences() && readLocalStorage(THEME_STORAGE_KEY) === THEME_DARK
   ));
   const [activeSection, setActiveSection] = useState('hero');
   const { t, i18n } = useTranslation();
@@ -52,18 +55,24 @@ const App = () => {
     }
 
     if (canPersistNonEssentialPreferences()) {
-      writeLocalStorage('cvTheme', darkMode ? 'dark' : 'light');
+      writeLocalStorage(THEME_STORAGE_KEY, darkMode ? THEME_DARK : THEME_LIGHT);
       return;
     }
 
-    removeLocalStorage('cvTheme');
+    removeLocalStorage(THEME_STORAGE_KEY);
   }, [darkMode]);
 
-  useEffect(() => onConsentStateChange(() => {
-    if (!canPersistNonEssentialPreferences()) {
-      removeLocalStorage('cvTheme');
-    }
-  }), []);
+  useEffect(() => {
+    const removeConsentListener = onConsentStateChange(() => {
+      if (!canPersistNonEssentialPreferences()) {
+        removeLocalStorage(THEME_STORAGE_KEY);
+      }
+    });
+
+    return () => {
+      removeConsentListener();
+    };
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
