@@ -27,34 +27,31 @@ const CookieSettings = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const currentConsentState = getConsentState();
-
-    if (currentConsentState === CONSENT_STATES.CONFIGURED) {
-      const savedSettings = getCookieSettings();
-      if (savedSettings) {
-        setSettings((previousSettings) => ({ ...previousSettings, ...savedSettings }));
+    const applySettingsFromConsent = (consentState) => {
+      if (consentState === CONSENT_STATES.ACCEPTED) {
+        setSettings((previousSettings) => ({ ...previousSettings, preferences: true }));
+        return;
       }
-    }
 
-    if (currentConsentState === CONSENT_STATES.REJECTED) {
-      setSettings((previousSettings) => ({ ...previousSettings, preferences: false }));
-    }
-
-    // Escuchar evento para abrir configuración
-    const handleOpenSettings = () => setIsOpen(true);
-    const removeConsentListener = onConsentStateChange(() => {
-      const nextConsentState = getConsentState();
-
-      if (nextConsentState === CONSENT_STATES.CONFIGURED) {
+      if (consentState === CONSENT_STATES.CONFIGURED) {
         const savedSettings = getCookieSettings();
         if (savedSettings) {
           setSettings((previousSettings) => ({ ...previousSettings, ...savedSettings }));
         }
+        return;
       }
 
-      if (nextConsentState === CONSENT_STATES.REJECTED) {
+      if (consentState === CONSENT_STATES.REJECTED) {
         setSettings((previousSettings) => ({ ...previousSettings, preferences: false }));
       }
+    };
+
+    applySettingsFromConsent(getConsentState());
+
+    // Escuchar evento para abrir configuración
+    const handleOpenSettings = () => setIsOpen(true);
+    const removeConsentListener = onConsentStateChange(() => {
+      applySettingsFromConsent(getConsentState());
     });
     window.addEventListener('openCookieSettings', handleOpenSettings);
     
