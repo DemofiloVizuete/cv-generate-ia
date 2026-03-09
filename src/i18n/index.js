@@ -5,11 +5,7 @@ import {
   canPersistNonEssentialPreferences,
   onConsentStateChange
 } from '../lib/consent';
-import {
-  LANGUAGE_STORAGE_KEY,
-  removeLocalStorage,
-  writeLocalStorage
-} from '../lib/safeLocalStorage';
+import { syncLanguagePreference } from '../lib/preferences';
 
 import es from './locales/es.json';
 import en from './locales/en.json';
@@ -46,13 +42,7 @@ i18n
   });
 
 const syncLanguageStorage = (lng) => {
-  if (!SUPPORTED_LANGUAGES.includes(lng)) return;
-  if (canPersistNonEssentialPreferences()) {
-    writeLocalStorage(LANGUAGE_STORAGE_KEY, lng);
-    return;
-  }
-
-  removeLocalStorage(LANGUAGE_STORAGE_KEY);
+  syncLanguagePreference(lng, SUPPORTED_LANGUAGES);
 };
 
 i18n.on('languageChanged', syncLanguageStorage);

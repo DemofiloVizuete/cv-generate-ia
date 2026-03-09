@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { 
@@ -23,17 +23,12 @@ import CookieBanner from './components/CookieBanner';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import CookieSettings from './components/CookieSettings';
 import {
-  canPersistNonEssentialPreferences,
   onConsentStateChange
 } from './lib/consent';
 import {
-  readLocalStorage,
-  removeLocalStorage,
-  THEME_DARK,
-  THEME_LIGHT,
-  THEME_STORAGE_KEY,
-  writeLocalStorage
-} from './lib/safeLocalStorage';
+  getInitialThemePreference,
+  syncThemePreference
+} from './lib/preferences';
 
 // Importar imágenes
 import iaImage from './assets/ia_tecnologia_profesional.png';
@@ -42,31 +37,27 @@ import redesImage from './assets/redes_neuronales_abstractas.png';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(() => (
-    canPersistNonEssentialPreferences() && readLocalStorage(THEME_STORAGE_KEY) === THEME_DARK
+    getInitialThemePreference()
   ));
+  const darkModeRef = useRef(darkMode);
   const [activeSection, setActiveSection] = useState('hero');
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
+    darkModeRef.current = darkMode;
+
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
 
-    if (canPersistNonEssentialPreferences()) {
-      writeLocalStorage(THEME_STORAGE_KEY, darkMode ? THEME_DARK : THEME_LIGHT);
-      return;
-    }
-
-    removeLocalStorage(THEME_STORAGE_KEY);
+    syncThemePreference(darkMode);
   }, [darkMode]);
 
   useEffect(() => {
     const removeConsentListener = onConsentStateChange(() => {
-      if (!canPersistNonEssentialPreferences()) {
-        removeLocalStorage(THEME_STORAGE_KEY);
-      }
+      syncThemePreference(darkModeRef.current);
     });
 
     return () => {
