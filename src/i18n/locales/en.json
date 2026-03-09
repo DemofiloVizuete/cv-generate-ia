@@ -72,11 +72,42 @@
     "title": "Certifications",
     "subtitle": "Professional certifications in Microsoft technologies",
     "issued": "Issued",
-    "id": "ID"
+    "id": "ID",
+    "items": [
+      {
+        "name": "Microsoft AI Product Manager",
+        "issuer": "Microsoft",
+        "date": "Jul. 2025",
+        "credentialId": "ZDWURP3GQA57"
+      },
+      {
+        "name": "Enterprise Product Management Fundamentals",
+        "issuer": "Microsoft",
+        "date": "Jun. 2025",
+        "credentialId": "P2SKY4RZ0ZGG"
+      }
+    ]
   },
   "skills": {
     "title": "Technical Skills",
-    "subtitle": "Specialized technologies and competencies"
+    "subtitle": "Specialized technologies and competencies",
+    "items": [
+      "Artificial Intelligence",
+      "Microsoft Azure",
+      "RPA (Robotic Process Automation)",
+      "Intelligent Automation",
+      "IT Project Management",
+      "Business Opportunity Development",
+      "Systems Analysis",
+      "Digital Transformation",
+      "Machine Learning",
+      "Azure AI",
+      "Power Platform",
+      "Python",
+      "C#",
+      ".NET",
+      "SQL Server"
+    ]
   },
   "contact": {
     "title": "Contact",
