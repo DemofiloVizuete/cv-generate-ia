@@ -100,39 +100,10 @@ const App = () => {
   // Obtener datos dinámicamente de las traducciones
   const experiences = t('experience.jobs', { returnObjects: true }) || [];
   const education = t('education.items', { returnObjects: true }) || [];
-
-  const certifications = [
-    {
-      name: "Microsoft AI Product Manager",
-      issuer: "Microsoft",
-      date: "jul. 2025",
-      credentialId: "ZDWURP3GQA57"
-    },
-    {
-      name: "Enterprise Product Management Fundamentals",
-      issuer: "Microsoft",
-      date: "jun. 2025",
-      credentialId: "P2SKY4RZ0ZGG"
-    }
-  ];
-
-  const skills = [
-    "Inteligencia Artificial",
-    "Microsoft Azure",
-    "RPA (Robotic Process Automation)",
-    "Automatización Inteligente",
-    "Dirección de Proyectos de TI",
-    "Desarrollo de Oportunidades de Negocio",
-    "Análisis de Sistemas",
-    "Transformación Digital",
-    "Machine Learning",
-    "Azure AI",
-    "Power Platform",
-    "Python",
-    "C#",
-    ".NET",
-    "SQL Server"
-  ];
+  const certificationsData = t('certifications.items', { returnObjects: true });
+  const skillsData = t('skills.items', { returnObjects: true });
+  const certifications = Array.isArray(certificationsData) ? certificationsData : [];
+  const skills = Array.isArray(skillsData) ? skillsData : [];
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
