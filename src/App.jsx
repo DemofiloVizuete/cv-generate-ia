@@ -22,6 +22,15 @@ import ProtectedEmail from './components/ProtectedEmail';
 import CookieBanner from './components/CookieBanner';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import CookieSettings from './components/CookieSettings';
+import {
+  canPersistNonEssentialPreferences,
+  onConsentStateChange
+} from './lib/consent';
+import {
+  readLocalStorage,
+  removeLocalStorage,
+  writeLocalStorage
+} from './lib/safeLocalStorage';
 
 // Importar imágenes
 import iaImage from './assets/ia_tecnologia_profesional.png';
@@ -29,7 +38,9 @@ import futuroImage from './assets/futuro_ia_minimalista.png';
 import redesImage from './assets/redes_neuronales_abstractas.png';
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => (
+    canPersistNonEssentialPreferences() && readLocalStorage('cvTheme') === 'dark'
+  ));
   const [activeSection, setActiveSection] = useState('hero');
   const { t, i18n } = useTranslation();
 
@@ -39,7 +50,20 @@ const App = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    if (canPersistNonEssentialPreferences()) {
+      writeLocalStorage('cvTheme', darkMode ? 'dark' : 'light');
+      return;
+    }
+
+    removeLocalStorage('cvTheme');
   }, [darkMode]);
+
+  useEffect(() => onConsentStateChange(() => {
+    if (!canPersistNonEssentialPreferences()) {
+      removeLocalStorage('cvTheme');
+    }
+  }), []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -552,4 +576,3 @@ const App = () => {
 };
 
 export default App;
-

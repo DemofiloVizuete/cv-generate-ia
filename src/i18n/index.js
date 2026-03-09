@@ -5,6 +5,10 @@ import {
   canPersistNonEssentialPreferences,
   onConsentStateChange
 } from '../lib/consent';
+import {
+  removeLocalStorage,
+  writeLocalStorage
+} from '../lib/safeLocalStorage';
 
 import es from './locales/es.json';
 import en from './locales/en.json';
@@ -37,13 +41,13 @@ i18n
   });
 
 const syncLanguageStorage = (lng) => {
-  if (typeof window === 'undefined') return;
+  if (!['es', 'en'].includes(lng)) return;
   if (canPersistNonEssentialPreferences()) {
-    window.localStorage.setItem('i18nextLng', lng);
+    writeLocalStorage('i18nextLng', lng);
     return;
   }
 
-  window.localStorage.removeItem('i18nextLng');
+  removeLocalStorage('i18nextLng');
 };
 
 i18n.on('languageChanged', syncLanguageStorage);

@@ -1,3 +1,10 @@
+import {
+  readLocalStorage,
+  readLocalStorageJSON,
+  removeLocalStorage,
+  writeLocalStorage
+} from './safeLocalStorage';
+
 export const CONSENT_STATES = {
   ACCEPTED: 'accepted',
   REJECTED: 'rejected',
@@ -5,29 +12,34 @@ export const CONSENT_STATES = {
   UNKNOWN: 'unknown'
 };
 
+export const DEFAULT_COOKIE_SETTINGS = {
+  essential: true,
+  preferences: false,
+  analytics: false
+};
+
 const CONSENT_KEY = 'cookieConsent';
 const SETTINGS_KEY = 'cookieSettings';
+const THEME_KEY = 'cvTheme';
 const CONSENT_EVENT = 'cookieConsentChanged';
 
 const isBrowser = () => typeof window !== 'undefined';
 
-const readLocalStorage = (key) => {
-  if (!isBrowser()) return null;
-  return window.localStorage.getItem(key);
-};
+const isCookieSettingsShape = (value) => (
+  Boolean(value)
+  && typeof value === 'object'
+  && typeof value.preferences === 'boolean'
+  && typeof value.analytics === 'boolean'
+);
 
-const writeLocalStorage = (key, value) => {
-  if (!isBrowser()) return;
-  window.localStorage.setItem(key, value);
-};
-
-const removeLocalStorage = (key) => {
-  if (!isBrowser()) return;
-  window.localStorage.removeItem(key);
-};
+const normalizeCookieSettings = (value) => ({
+  ...DEFAULT_COOKIE_SETTINGS,
+  ...(isCookieSettingsShape(value) ? value : {})
+});
 
 export const clearNonEssentialPreferences = () => {
   removeLocalStorage('i18nextLng');
+  removeLocalStorage(THEME_KEY);
   if (isBrowser()) {
     document.cookie = 'sidebar_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   }
@@ -42,14 +54,9 @@ export const getConsentState = () => {
 };
 
 export const getCookieSettings = () => {
-  const raw = readLocalStorage(SETTINGS_KEY);
-  if (!raw) return null;
-
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return null;
-  }
+  const parsed = readLocalStorageJSON(SETTINGS_KEY);
+  if (!parsed) return null;
+  return normalizeCookieSettings(parsed);
 };
 
 export const canPersistNonEssentialPreferences = () => {
@@ -71,10 +78,11 @@ export const setConsentState = (state) => {
 };
 
 export const saveCookieSettings = (settings) => {
-  writeLocalStorage(SETTINGS_KEY, JSON.stringify(settings));
+  const normalizedSettings = normalizeCookieSettings(settings);
+  writeLocalStorage(SETTINGS_KEY, JSON.stringify(normalizedSettings));
   setConsentState(CONSENT_STATES.CONFIGURED);
 
-  if (!settings.preferences) {
+  if (!normalizedSettings.preferences) {
     clearNonEssentialPreferences();
   }
 };
