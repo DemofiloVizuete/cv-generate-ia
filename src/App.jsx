@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { 
@@ -39,10 +39,13 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(() => (
     getInitialThemePreference()
   ));
+  const darkModeRef = useRef(darkMode);
   const [activeSection, setActiveSection] = useState('hero');
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
+    darkModeRef.current = darkMode;
+
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -54,13 +57,13 @@ const App = () => {
 
   useEffect(() => {
     const removeConsentListener = onConsentStateChange(() => {
-      syncThemePreference(darkMode);
+      syncThemePreference(darkModeRef.current);
     });
 
     return () => {
       removeConsentListener();
     };
-  }, [darkMode]);
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
