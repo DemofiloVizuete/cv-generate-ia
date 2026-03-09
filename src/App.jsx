@@ -22,6 +22,18 @@ import ProtectedEmail from './components/ProtectedEmail';
 import CookieBanner from './components/CookieBanner';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import CookieSettings from './components/CookieSettings';
+import {
+  canPersistNonEssentialPreferences,
+  onConsentStateChange
+} from './lib/consent';
+import {
+  readLocalStorage,
+  removeLocalStorage,
+  THEME_DARK,
+  THEME_LIGHT,
+  THEME_STORAGE_KEY,
+  writeLocalStorage
+} from './lib/safeLocalStorage';
 
 // Importar imágenes
 import iaImage from './assets/ia_tecnologia_profesional.png';
@@ -29,7 +41,9 @@ import futuroImage from './assets/futuro_ia_minimalista.png';
 import redesImage from './assets/redes_neuronales_abstractas.png';
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => (
+    canPersistNonEssentialPreferences() && readLocalStorage(THEME_STORAGE_KEY) === THEME_DARK
+  ));
   const [activeSection, setActiveSection] = useState('hero');
   const { t, i18n } = useTranslation();
 
@@ -39,7 +53,26 @@ const App = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    if (canPersistNonEssentialPreferences()) {
+      writeLocalStorage(THEME_STORAGE_KEY, darkMode ? THEME_DARK : THEME_LIGHT);
+      return;
+    }
+
+    removeLocalStorage(THEME_STORAGE_KEY);
   }, [darkMode]);
+
+  useEffect(() => {
+    const removeConsentListener = onConsentStateChange(() => {
+      if (!canPersistNonEssentialPreferences()) {
+        removeLocalStorage(THEME_STORAGE_KEY);
+      }
+    });
+
+    return () => {
+      removeConsentListener();
+    };
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -552,4 +585,3 @@ const App = () => {
 };
 
 export default App;
-
