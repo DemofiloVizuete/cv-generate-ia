@@ -11,7 +11,7 @@ He analizado y resuelto los **5 errores de seguridad** detectados en tu Web Chec
 ### 1. 🎯 **QUALITY** ✅
 - ✅ Meta tags de SEO completos (title, description, keywords)
 - ✅ Open Graph y Twitter Cards configurados
-- ✅ Headers de seguridad (X-Frame-Options, X-XSS-Protection, etc.)
+- ✅ Headers de seguridad (X-Frame-Options y X-Content-Type-Options (retirado X-XSS-Protection obsoleto).)
 - ✅ Estructura HTML semántica con roles y aria-labels
 - ✅ Content Security Policy (CSP) implementado
 
