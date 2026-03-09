@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { navigationItems } from '../constants/navigationItems';

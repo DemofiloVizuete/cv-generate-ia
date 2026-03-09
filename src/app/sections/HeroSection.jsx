@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Briefcase, ChevronDown, Download, MapPin } from 'lucide-react';
 

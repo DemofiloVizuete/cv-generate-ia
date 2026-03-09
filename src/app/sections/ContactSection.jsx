@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { ExternalLink, Mail, MapPin } from 'lucide-react';
 import ProtectedEmail from '../../components/ProtectedEmail';
